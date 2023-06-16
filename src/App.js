@@ -27,13 +27,20 @@ const App = () => {
     })
   };
 
+  const removeTask = (id) => {
+    setTask(prevTask => {
+      const updatedtask = prevTask.filter(task => task.id !==id);
+      return updatedtask;
+    })
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
-        <div>{<TaskList tasks={tasks} toggleTask = {toggleTask}/>}</div>
+        <div>{<TaskList tasks={tasks} toggleTask = {toggleTask} removeTask = {removeTask}/>}</div>
       </main>
     </div>
   );
