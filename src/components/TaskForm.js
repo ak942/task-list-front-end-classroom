@@ -1,14 +1,22 @@
 import React from 'react'
 
-const TaskForm = () => {
+const TaskForm = ({addTaskCallBack}) => {
     const[formFields, setFormFields] = React.useState({
         title:'',
     });
 
     const handleChange = evt => setFormFields({...formFields,[evt.target.name]: evt.target.value});
 
+    const handleOnSubmit=(event)=> {
+        event.preventDefault()
+        addTaskCallBack(formFields)
+        setFormFields({
+            title:''
+        })
+    };
+
     return (
-        <form>
+        <form onSubmit = {handleOnSubmit}>
             <section>
                 <h2>Add a New Task!</h2>
                 <div className='new_task_fields'>

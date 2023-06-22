@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskList from './components/TaskList.js';
+import TaskForm from './components/TaskForm.js';
 import './App.css';
 
 const TASKS = [
@@ -33,6 +34,16 @@ const App = () => {
       return updatedtask;
     })
   }
+  const addTaskCallBack  (newTaskData) => {
+    axios.post('urlforposting',newTaskData)
+    .then(response => {
+      const taskList = [...tasks]
+      taskList.push({
+        title: response.data.title
+      })
+      setTask(taskList)
+    })
+  }
 
   return (
     <div className="App">
@@ -40,6 +51,7 @@ const App = () => {
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
+        <TaskForm addTaskCallBack={addTaskCallBack}></TaskForm>
         <div>{<TaskList tasks={tasks} toggleTask = {toggleTask} removeTask = {removeTask}/>}</div>
       </main>
     </div>
